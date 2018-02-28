@@ -1,5 +1,18 @@
 'use strict';
 
+require("appdynamics").profile({
+  controllerHostName: process.env.APPDYNAMICS_CONTROLLERHOST,
+  controllerPort: 443, 
+  
+  // If SSL, be sure to enable the next line
+  controllerSslEnabled: true,
+  accountName: process.env.APPDYNAMICS_ACCOUNTNAME,
+  accountAccessKey: process.env.APPDYNAMICS_ACCOUNTACCESSKEY,
+  applicationName: process.env.APPDYNAMICS_APPLICATIONNAME,
+  tierName: process.env.APPDYNAMICS_TIERNAME,
+  nodeName: 'process' // The controller will automatically append the node name with a unique number
+ });
+
 var SwaggerExpress = require('swagger-express-mw');
 var SwaggerUi = require('swagger-tools/middleware/swagger-ui');
 var initCouch = require('./api/helpers/init_couch');
