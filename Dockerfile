@@ -15,6 +15,7 @@ RUN npm install
 # Environment variables you can override
 ENV COUCHDB_URL http://127.0.0.1:5984
 ENV COUCHDB_NAME movies
+ENV APPINSIGHTS_INSTRUMENTATIONKEY "1"
 
 # Bundle app source
 COPY . .
