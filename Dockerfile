@@ -1,4 +1,4 @@
-FROM node:carbon
+FROM node
 LABEL description="Movie API with CouchDB backend"
 LABEL maintainer="Ahmed Sabbour (asabbour@microsoft.com)"
 
@@ -8,19 +8,8 @@ WORKDIR /usr/src/app
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
-COPY package*.json ./
-
-RUN npm install
-
-# Environment variables you can override
-ENV COUCHDB_URL http://127.0.0.1:5984
-ENV COUCHDB_NAME movies
-ENV APPINSIGHTS_INSTRUMENTATIONKEY "1"
-ENV APPDYNAMICS_CONTROLLERHOST "XXXX.saas.appdynamics.com"
-ENV APPDYNAMICS_ACCOUNTNAME "XXXX"
-ENV APPDYNAMICS_ACCOUNTACCESSKEY "<access key>"
-ENV APPDYNAMICS_APPLICATIONNAME "<appdynamics app name>"
-ENV APPDYNAMICS_TIERNAME = "<tier name>"
+COPY package.json ./
+RUN npm update && npm install
 
 # Bundle app source
 COPY . .

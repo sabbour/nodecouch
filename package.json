@@ -13,7 +13,7 @@
     "asynx": "0.0.3",
     "deep-equal": "^1.0.1",
     "express": "^4.12.3",
-    "nano": "^6.4.2",
+    "nano": "^6.4.3",
     "swagger-express-mw": "^0.1.0",
     "swagger-tools": "^0.10.3"
   },

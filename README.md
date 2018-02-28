@@ -12,7 +12,7 @@ You can run this application through Docker, but you need to have some prerequis
 - Have CouchDB accessible in your environment.
 
 ## Configuration
-You need to pass the following environment variables:
+You need to pass the following environment variables. You can either set them in your environment, configure them from Kubernetes, or pass them to Docker by editing the `env.list` file.
 
 - `COUCHDB_URL`. Example: `http://127.0.0.1:5984`
 - `COUCHDB_NAME`. Example: `movies`
@@ -23,8 +23,14 @@ You need to pass the following environment variables:
 - `APPDYNAMICS_APPLICATIONNAME`
 - `APPDYNAMICS_TIERNAME`
 
+## Building the Docker image
+`docker build . -t nodecouch`
+
+## Running the Docker image
+`docker run -it -p 8080 --env-file ./env.list nodecouch`
+
 ## Testing
-Once you have the application running, you should be able to use Swagger-UI deployed at http://host/swagger to make a few calls.
+Once you have the application running, you should be able to use Swagger-UI deployed at http://host:publishedport/swagger to make a few calls.
 ## Monitoring
 
 You should see the calls show up in the App Dynamics dashboard
