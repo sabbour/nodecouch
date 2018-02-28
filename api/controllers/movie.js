@@ -15,12 +15,13 @@ module.exports = {
 
 //GET /movie operationId
 function getAll(req, res, next) {
-    var listOfMovies = movies.list(
+    movies.list(
         function (err, rows) {
             if (err) {
-                throw err;
-            }
-            else {
+                res.status(400).json({
+                    message: err.message
+                });
+            } else {
                 console.log('movies retrieved');
                 res.json({
                     movies: rows
@@ -32,26 +33,25 @@ function getAll(req, res, next) {
 //GET /movie/{id} operationId
 function getOne(req, res, next) {
     var id = req.swagger.params.id.value; //req.swagger contains the path parameters
-    var movie = movies.get(id, function () {
-        if (movie) {
-            res.json(movie);
+    movies.get(id, function (err, movie) {
+        if (err) {
+            res.status(400).json({
+                message: err.message
+            });
         } else {
-            res.status(204).send();
+            console.log('movie ' + id + ' retrieved');
+            res.json(movie);
         }
     });
 }
 
 //POST /movie operationId
 function save(req, res, next) {
-
-    var movie = {
-        name: 'Jurassic Park',
-        genre: 'Thriller'
-    };
-
-    movies.create(movie, function (err) {
+    movies.create(req.body, function (err) {
         if (err) {
-            throw err;
+            res.status(400).json({
+                message: err.message
+            });
         } else {
             console.log('movie inserted');
             res.json({

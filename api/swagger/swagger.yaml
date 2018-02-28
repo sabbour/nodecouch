@@ -42,8 +42,8 @@ paths:
       operationId: save
       # movie info to be stored
       parameters:
-        - name: title
-          description: Movie properties
+        - name: movie # ignored
+          description: movie properties
           in: body
           required: true
           schema:
@@ -85,15 +85,15 @@ definitions:
   Movie:
     type: object
     properties:
-      title:
+      name:
         type: string
-        description: task object name
-      year:
-        type: number
-        description: task description
+        description: name of the movie
+      genre:
+        type: string
+        description: genre of the movie
     required:
-      - title
-      - year
+      - name
+      - genre
       
   GetMoviesListResponse:
       required:
@@ -105,25 +105,25 @@ definitions:
           items: 
             type: object
             properties:
-              id:
+              _id:
                 type: string
-              title:
+              name:
                 type: string
-              year:
-                type: number
+              genre:
+                type: string
   
   GetMovieResponse:
     required:
-      - id
-      - title
-      - year
+      - _id
+      - name
+      - genre
     properties:
-      id:
+      _id:
         type: string
-      title: 
+      name: 
         type: string
-      year:
-        type: number
+      genre:
+        type: string
   
   GeneralResponse:
     type: object

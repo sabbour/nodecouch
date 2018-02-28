@@ -1,6 +1,5 @@
 var async = require('async');  
 var couch = require('./couchdb');
-var views = require('../views');
 
 var dbname = process.env.COUCHDB_NAME || 'movies'
 var databases = [dbname];
@@ -22,8 +21,4 @@ function createDatabase(db, cb) {
     }
     cb(err);
   });
-
-  function createViews(cb) {  
-    views.populate(cb);
-  }
 }

@@ -8,37 +8,30 @@ exports.create = function createMovie(movie, cb) {
 
 
 exports.list = function listMovies(cb) {
-    movies.list({}, function(err, body) {
+    movies.list({include_docs: true}, function(err, body) {
         if (!err) {
-            cb(null,body.rows);
+            var docs = [];
+            body.rows.forEach(function(doc) {
+                docs.push(doc.doc);
+            });
+            cb(null,docs);
         }
         else {
             console.log("Error: " + err)
+            cb(err,null);
         }
       });
 };
 
-exports.get = function getMovie(movieId, cb) {
-    movies.fetch({movieId}, function(err, body) {
+exports.get = function getMovie(id, cb) {
+    movies.get(id, { revs_info: false }, function(err, body) {
         if (!err) {
+            console.log("Movie: " + JSON.stringify(body));
             cb(null,body);
         }
         else {
             console.log("Error: " + err)
+            cb(err,null);
         }
     });
-    /*movies.view(
-        'by_id', 'by_id', {keys: [movieId], include_docs: true},
-        function(err,result) {
-            if (err) {
-                throw err;
-            } 
-            else {
-                result = result.rows.map(function(row) {
-                  return row.doc;
-                });
-                cb(null, result);
-              }
-        }
-      );*/
 };
