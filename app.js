@@ -3,6 +3,16 @@
 var SwaggerExpress = require('swagger-express-mw');
 var SwaggerUi = require('swagger-tools/middleware/swagger-ui');
 var initCouch = require('./api/helpers/init_couch');
+const appInsights = require("applicationinsights");
+appInsights.setup()
+    .setAutoDependencyCorrelation(true)
+    .setAutoCollectRequests(true)
+    .setAutoCollectPerformance(true)
+    .setAutoCollectExceptions(true)
+    .setAutoCollectDependencies(true)
+    .setAutoCollectConsole(true)
+    .setUseDiskRetryCaching(true)
+    .start();
 
 var app = require('express')();
 module.exports = app; // for testing
@@ -19,6 +29,9 @@ initCouch(function(err) {
     console.log('couchdb initialized');
   }
 });
+
+// Configure App Insights
+app.set('telemetryClient', appInsights.defaultClient);
 
 SwaggerExpress.create(config, function(err, swaggerExpress) {
   if (err) { throw err; }

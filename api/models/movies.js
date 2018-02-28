@@ -5,8 +5,6 @@ exports.create = function createMovie(movie, cb) {
     movies.insert(movie, null /* let couchdb generate an id */ , cb);
 };
 
-
-
 exports.list = function listMovies(cb) {
     movies.list({include_docs: true}, function(err, body) {
         if (!err) {
