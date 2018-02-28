@@ -60,3 +60,9 @@ typings/
 # next.js build output
 .next
 .DS_Store
+<<<<<<< HEAD
+=======
+package-lock.json
+
+env.list
+>>>>>>> appdynamics-feature
