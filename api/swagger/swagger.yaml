@@ -3,7 +3,8 @@ info:
   version: "0.0.1"
   title: Movies API with CouchDB backend
 # during dev, should point to your local machine
-#host: localhost:8080
+host: nodecouch-couchdb.52.179.100.115.nip.io
+
 # basePath prefixes all resource paths 
 basePath: /
 # 

@@ -54,9 +54,9 @@ function getOne(req, res, next) {
 //POST /movie operationId
 function save(req, res, next) {
     var telemetryClient = req.app.get('telemetryClient');    
-    movies.create(req.body, function (err) {
-        telemetryClient.trackException({exception: new Error(err.message)});        
+    movies.create(req.body, function (err) {     
         if (err) {
+            telemetryClient.trackException({exception: new Error(err.message)});   
             res.status(400).json({
                 message: err.message
             });
