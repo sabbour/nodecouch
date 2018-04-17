@@ -28,7 +28,7 @@ exports.get = function getMovie(id, cb) {
             cb(null,body);
         }
         else {
-            console.log("Error: " + err)
+            console.log("Error: " + err);
             cb(err,null);
         }
     });

@@ -1,7 +1,7 @@
 var async = require('async');  
 var couch = require('./couchdb');
 
-var dbname = process.env.COUCHDB_NAME || 'movies'
+var dbname = process.env.COUCHDB_NAME || 'movies';
 var databases = [dbname];
 
 module.exports = initCouch;
